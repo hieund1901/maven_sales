@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-3t
+    restart: always
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: mysql
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - bigdata
+
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  bigdata:
+    external: true

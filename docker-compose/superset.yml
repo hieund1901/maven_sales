@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+  superset:
+    image: apache/superset:latest
+    container_name: superset
+    restart: always
+    environment:
+      SUPERSET_LOAD_EXAMPLES: "no"
+      SUPERSET_SECRET_KEY: ""
+      SUPERSET_ADMIN_PASSWORD: "admin"
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: mysql+pymysql://mysql:admin@mysql:3306/superset_db # Connect to MySQL from database.yml
+    ports:
+      - "8088:8088"
+    depends_on:
+      - redis
+    volumes:
+      - superset_home:/app/superset_home
+      - superset_logs:/app/superset_logs
+    networks:
+      - bigdata
+
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning
+    networks:
+      - bigdata
+
+volumes:
+  superset_home:
+  superset_logs:
+
+networks:
+  bigdata:
+    external: true
