@@ -1,5 +1,5 @@
 {
-  "name": "inventory-connector",
+  "name": "warehouse-connector",
   "config": {
     "connector.class": "io.debezium.connector.mysql.MySqlConnector",
     "tasks.max": "1",
@@ -9,8 +9,10 @@
     "database.password": "admin",
     "database.server.id": "184054",
     "topic.prefix": "dbserver1",
-    "database.include.list": "inventory",
-    "schema.history.internal.kafka.bootstrap.servers": "kafka:9092",
-    "schema.history.internal.kafka.topic": "schema-changes.inventory"
+    "database.include.list": "warehouse",
+    "table.include.list": "warehouse.accounts,warehouse.products,warehouse.sales_pipeline,warehouse.sales_teams",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka-broker-1:9092,kafka-broker-2:9092,kafka-broker-3:9092",
+    "schema.history.internal.kafka.topic": "schema-changes.warehouse",
+    "database.history": "io.debezium.relational.history.KafkaDatabaseHistory"
   }
 }
