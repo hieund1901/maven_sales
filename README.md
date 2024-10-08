@@ -80,5 +80,5 @@ Open a web browser and navigate to the following URLs to access various project 
 - **Kafka UI:** `http://localhost:8090/` _(authentication not required)_
 - **MinIO:** `http://localhost:9000/`, username:`root_admin`, password:`root_admin`
 - **Airflow UI:** `http://localhost:8080/`, username:`airflow`, password:`airflow`
-- **Superset:** `http://localhost:8088/`, password:`admin`
+- **Superset:** `http://localhost:8088/`, username:`admin`, password:`admin`
 - **MySQL:** `http://localhost:3306`, user:`mysql`, password:`admin`
