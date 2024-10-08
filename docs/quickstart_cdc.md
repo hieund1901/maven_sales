@@ -47,7 +47,7 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 
 curl -X GET http://localhost:8083/connectors
 ```
 
--- Delete connector
+- Delete connector
 
 ```terminal
 curl -X DELETE http://localhost:8083/connectors/warehouse-connector
