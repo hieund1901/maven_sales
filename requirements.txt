@@ -1,0 +1,8 @@
+pandas
+numpy
+pyspark
+redis 
+kafka-python
+minio
+mysql-connector-python
+six

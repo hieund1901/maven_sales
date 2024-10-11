@@ -9,4 +9,7 @@
 *.iml
 *.ipr
 
-docker-compose/logs/
+docker-compose/logs/dag_processor_manager
+docker-compose/logs/scheduler
+
+venv/
