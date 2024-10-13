@@ -13,3 +13,5 @@ docker-compose/logs/dag_processor_manager
 docker-compose/logs/scheduler
 
 venv/
+
+src/.env
