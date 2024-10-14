@@ -1,8 +1,15 @@
 import redis
 import json
 from kafka import KafkaConsumer # type: ignore
+from dotenv import load_dotenv
+import os
 
-def connect_redis(host='localhost', port=6379, db=0):
+load_dotenv()
+
+def connect_redis():
+    host  = os.getenv('REDIS_HOST')
+    port = int(os.getenv('REDIS_PORT'))
+    db = os.getenv('REDIS_DB')
     try:
         r = redis.Redis(host=host, port=port, db=db)
         if r.ping():
@@ -12,7 +19,11 @@ def connect_redis(host='localhost', port=6379, db=0):
         print(f'Error connect to Redis: {e}')
         return None
     
-def connect_kafka(topic, servers , group_id = 'cdc-group'):
+def connect_kafka():
+    topic = os.getenv('KAFKA_TOPIC')
+    servers = os.getenv('KAFKA_SERVERS').split(',')
+    group_id = os.getenv('KAFKA_GROUP_ID')
+
     try:
         consumer = KafkaConsumer(
             topic,
@@ -33,7 +44,7 @@ def store_data_to_redis(redis_conn, consumer):
         for message in consumer:
             data = message.value
             opportuinity_id = data['payload']['after']['opportunity_id']
-            redis_conn.setex(f'cdc:sales:{opportuinity_id}', 60, json.dumps(data))
+            redis_conn.setex(f'cdc:sales:{opportuinity_id}', 604800, json.dumps(data))
             print(f'Stored data for opportunity_id: {opportuinity_id} to Redis')
     except Exception as e:
         print(f'Error storing data to Redis: {e}')
@@ -42,7 +53,7 @@ def main():
     redis_conn = connect_redis()
 
     if redis_conn:
-        kafka_consumer = connect_kafka('dbserver1.warehouse.sales_pipeline', 'localhost:39092')
+        kafka_consumer = connect_kafka()
         if kafka_consumer:
             store_data_to_redis(redis_conn, kafka_consumer)
 
