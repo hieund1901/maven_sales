@@ -1,0 +1,18 @@
+[2024-10-20T17:25:20.527+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: cdc_to_minio.run_transfer_to_minio manual__2024-10-20T17:25:19.103845+00:00 [queued]>
+[2024-10-20T17:25:20.533+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: cdc_to_minio.run_transfer_to_minio manual__2024-10-20T17:25:19.103845+00:00 [queued]>
+[2024-10-20T17:25:20.534+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2024-10-20T17:25:20.547+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_transfer_to_minio> on 2024-10-20 17:25:19.103845+00:00
+[2024-10-20T17:25:20.550+0000] {standard_task_runner.py:60} INFO - Started process 443 to run task
+[2024-10-20T17:25:20.552+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'cdc_to_minio', 'run_transfer_to_minio', 'manual__2024-10-20T17:25:19.103845+00:00', '--job-id', '240', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_cdc_to_minio.py', '--cfg-path', '/tmp/tmp1vjlbnxn']
+[2024-10-20T17:25:20.553+0000] {standard_task_runner.py:88} INFO - Job 240: Subtask run_transfer_to_minio
+[2024-10-20T17:25:20.579+0000] {task_command.py:423} INFO - Running <TaskInstance: cdc_to_minio.run_transfer_to_minio manual__2024-10-20T17:25:19.103845+00:00 [running]> on host ac960a3ccd9e
+[2024-10-20T17:25:20.613+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='cdc_to_minio' AIRFLOW_CTX_TASK_ID='run_transfer_to_minio' AIRFLOW_CTX_EXECUTION_DATE='2024-10-20T17:25:19.103845+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-10-20T17:25:19.103845+00:00'
+[2024-10-20T17:25:20.614+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2024-10-20T17:25:20.614+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/***/src/other_services/transfer_to_minio.py']
+[2024-10-20T17:25:20.624+0000] {subprocess.py:86} INFO - Output:
+[2024-10-20T17:25:20.860+0000] {subprocess.py:93} INFO - Error connect to Redis: Error 99 connecting to localhost:6379. Cannot assign requested address.
+[2024-10-20T17:25:20.861+0000] {subprocess.py:93} INFO - Connected to Minio
+[2024-10-20T17:25:20.875+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2024-10-20T17:25:20.888+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=cdc_to_minio, task_id=run_transfer_to_minio, execution_date=20241020T172519, start_date=20241020T172520, end_date=20241020T172520
+[2024-10-20T17:25:20.928+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-10-20T17:25:20.937+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

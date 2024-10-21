@@ -77,8 +77,8 @@ This command will build and start the Docker containers for various services in 
 
 Open a web browser and navigate to the following URLs to access various project services:
 
-- **Kafka UI:** `http://localhost:8090/` _(authentication not required)_
-- **MinIO:** `http://localhost:9000/`, username:`root_admin`, password:`root_admin`
-- **Airflow UI:** `http://localhost:8080/`, username:`airflow`, password:`airflow`
-- **Superset:** `http://localhost:8088/`, username:`admin`, password:`admin`
-- **MySQL:** `http://localhost:3306`, user:`mysql`, password:`admin`
+- **Kafka UI:** `http://localhost:8090/`
+- **MinIO:** `http://localhost:9000/`
+- **Airflow UI:** `http://localhost:8080/`
+- **Superset:** `http://localhost:8088/`
+- **MySQL:** `http://localhost:3306`

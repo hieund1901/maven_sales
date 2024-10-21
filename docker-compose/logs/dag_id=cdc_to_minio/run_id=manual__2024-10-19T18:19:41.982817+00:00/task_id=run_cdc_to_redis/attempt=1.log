@@ -1,0 +1,15 @@
+[2024-10-19T18:19:42.782+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: cdc_to_minio.run_cdc_to_redis manual__2024-10-19T18:19:41.982817+00:00 [queued]>
+[2024-10-19T18:19:42.790+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: cdc_to_minio.run_cdc_to_redis manual__2024-10-19T18:19:41.982817+00:00 [queued]>
+[2024-10-19T18:19:42.790+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2024-10-19T18:19:42.802+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): run_cdc_to_redis> on 2024-10-19 18:19:41.982817+00:00
+[2024-10-19T18:19:42.806+0000] {standard_task_runner.py:60} INFO - Started process 2940 to run task
+[2024-10-19T18:19:42.811+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'cdc_to_minio', 'run_cdc_to_redis', 'manual__2024-10-19T18:19:41.982817+00:00', '--job-id', '211', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_cdc_to_minio.py', '--cfg-path', '/tmp/tmpcvv47t_m']
+[2024-10-19T18:19:42.813+0000] {standard_task_runner.py:88} INFO - Job 211: Subtask run_cdc_to_redis
+[2024-10-19T18:19:42.844+0000] {task_command.py:423} INFO - Running <TaskInstance: cdc_to_minio.run_cdc_to_redis manual__2024-10-19T18:19:41.982817+00:00 [running]> on host beb6c7b4df4e
+[2024-10-19T18:19:42.922+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='cdc_to_minio' AIRFLOW_CTX_TASK_ID='run_cdc_to_redis' AIRFLOW_CTX_EXECUTION_DATE='2024-10-19T18:19:41.982817+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-10-19T18:19:41.982817+00:00'
+[2024-10-19T18:19:43.075+0000] {logging_mixin.py:188} INFO - Output: None
+[2024-10-19T18:19:43.076+0000] {logging_mixin.py:188} INFO - Errors: None
+[2024-10-19T18:19:43.076+0000] {python.py:201} INFO - Done. Returned value was: None
+[2024-10-19T18:19:43.085+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=cdc_to_minio, task_id=run_cdc_to_redis, execution_date=20241019T181941, start_date=20241019T181942, end_date=20241019T181943
+[2024-10-19T18:19:43.109+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-10-19T18:19:43.125+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

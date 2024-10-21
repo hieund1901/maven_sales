@@ -1,0 +1,11 @@
+pandas
+numpy
+pyspark
+redis 
+kafka-python
+minio
+mysql-connector-python
+six
+python-dotenv
+apache-airflow
+types-pytz
