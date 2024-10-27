@@ -54,12 +54,13 @@ In this project, [Python](https://www.python.org/) served as the primary program
     git clone https://github.com/hieund1901/maven_sales.git
 ```
 
-### Step 2: Navigate to Project Directory
+### Step 2: Navigate to Project Directory and Setup
 
 Use the command line to navigate to the root directory of the project:
 
 ```terminal
     cd maven-sales
+    ./setup.sh
 ```
 
 ### Step 3: Start Docker Conatiners
