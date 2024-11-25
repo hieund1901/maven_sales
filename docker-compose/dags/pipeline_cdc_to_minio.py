@@ -20,6 +20,11 @@ with DAG(
     catchup=False,
 ) as dag:
     
+    run_data_transform_task = BashOperator(
+        task_id='run_data_transform',
+        bash_command='python3 /opt/airflow/src/kafka_consumer/data_transform.py'
+    )
+    
     run_cdc_to_redis_task = BashOperator(
         task_id='run_cdc_to_redis',
         bash_command='python3 /opt/airflow/src/kafka_consumer/cdc_to_redis.py'
@@ -30,4 +35,4 @@ with DAG(
         bash_command='python3 /opt/airflow/src/other_services/transfer_to_minio.py'
     )
 
-    run_cdc_to_redis_task >> run_transfer_to_minio_task
+    run_data_transform_task >> run_cdc_to_redis_task >> run_transfer_to_minio_task
