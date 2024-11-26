@@ -29,7 +29,7 @@ def connect_kafka():
             topic,
             bootstrap_servers = servers,
             auto_offset_reset = 'earliest',
-            enable_auto_commit = True,
+            enable_auto_commit = False,
             group_id = group_id,
             value_deserializer = lambda x: json.loads(x.decode('utf-8')),
             consumer_timeout_ms = 10000
@@ -42,11 +42,13 @@ def connect_kafka():
     
 def store_data_to_redis(redis_conn, consumer):
     try:
+        print("Waiting for messages...")
         for message in consumer:
             data = message.value
             opportuinity_id = data['payload']['after']['opportunity_id']
             redis_conn.setex(f'cdc:sales:{opportuinity_id}', 604800, json.dumps(data))
             print(f'Stored data for opportunity_id: {opportuinity_id} to Redis')
+            consumer.commit()
     except Exception as e:
         print(f'Error storing data to Redis: {e}')
 
