@@ -5,6 +5,7 @@ from minio.error import S3Error
 from dotenv import load_dotenv 
 import os 
 import io
+from datetime import datetime
 
 load_dotenv()
 
@@ -38,22 +39,29 @@ def connect_minio():
 def transfer_to_minio(minio_client, redis_conn):
     bucket_name = os.getenv('MINIO_BUCKET_NAME')
 
+    batch_size = 100
+
     try:
         keys = redis_conn.keys('cdc:sales:*')
-        for key in keys:
+        batch = []
+        for i, key in enumerate(keys):
             data = redis_conn.get(key)
-            # print(f'Raw data from Redis for key {key.decode("utf-8")}: {data}')
-
             if data:
                 data_dict = json.loads(data.decode('utf-8'))
-                json_data = json.dumps(data_dict)
+                batch.append((key, data_dict))
+
+            if len(batch) >= batch_size or i == len(keys) - 1:
+                date_partition = datetime.now().strftime('%Y-%m-%d')
+
+                object_name = f"{date_partition}/{key.decode('utf-8')}.json"
+                
+                # Chuyển dữ liệu của batch thành định dạng JSON và lưu vào MinIO
+                json_data = json.dumps([item[1] for item in batch]) # Chỉ lấy data_dict từ batch
                 json_bytes = json_data.encode('utf-8')
 
                 json_stream = io.BytesIO(json_bytes)
 
                 # print(f"Type of json_bytes: {type(json_bytes)}")
-
-                object_name = f"{key.decode('utf-8')}.json"
 
                 minio_client.put_object(
                     bucket_name,
@@ -65,8 +73,13 @@ def transfer_to_minio(minio_client, redis_conn):
 
                 print(f'Successfully uploaded {object_name} to MinIO')
 
-                redis_conn.delete(key)
-                print(f'Deleted key {key.decode("utf-8")} from Redis')
+                for key, _ in batch:
+                    redis_conn.delete(key)
+                    print(f'Deleted key {key.decode("utf-8")} from Redis')
+
+                # Reset batch sau khi đã xử lý
+                batch = []
+
     except S3Error as e:
         print(f'Error upploading to MinIO: {e}')
     except Exception as e:
